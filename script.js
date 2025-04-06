@@ -167,11 +167,35 @@ function getData(location) {
                 document.getElementById("no2").innerHTML = `AQI : ${data.data.iaqi.no2.v} <span>PM2.5(Nitrogen Dioxide)</span><br><span> ${getAQICategory(data.data.iaqi.no2.v)}</span>`;
                 document.getElementById("so2").innerHTML = `AQI : ${data.data.iaqi.so2.v} <span>PM2.5(Sulphar Dioxide)</span><br><span> ${getAQICategory(data.data.iaqi.so2.v)}</span>`;
             } else {
-                alert('location not found or API error.');
+                // Default values if API call fails or location not found
+                placeName.textContent = "Location not available";
+                aqi.textContent = "AQI : N/A";
+                airname.textContent = "N/A";
+                info.textContent = "Air quality data not available.";
+
+                document.getElementById("comp").textContent = `All Component`;
+                document.getElementById("PM2.5").innerHTML = `AQI : N/A <span>PM2.5(Particular Matter less than 2.5 microns)</span><br><span> N/A</span>`;
+                document.getElementById("PM10").innerHTML = `AQI : N/A <span>PM10(Particular Matter less than 10 microns)</span><br><span> N/A</span>`;
+                document.getElementById("co").innerHTML = `AQI : N/A <span>co(Carbon Monoxide)</span><br><span> N/A</span>`;
+                document.getElementById("o3").innerHTML = `AQI : N/A <span>PM2.5(Ozone)</span><br><span> N/A</span>`;
+                document.getElementById("no2").innerHTML = `AQI : N/A <span>PM2.5(Nitrogen Dioxide)</span><br><span> N/A</span>`;
+                document.getElementById("so2").innerHTML = `AQI : N/A <span>PM2.5(Sulphar Dioxide)</span><br><span> N/A</span>`;
             }
         }).catch((err) => {
             console.error(err);
-            alert(err);
+            // Default values if API call fails or location not found
+            placeName.textContent = "Location not available";
+            aqi.textContent = "AQI : N/A";
+            airname.textContent = "N/A";
+            info.textContent = "Air quality data not available.";
+
+            document.getElementById("comp").textContent = `All Component`;
+            document.getElementById("PM2.5").innerHTML = `AQI : N/A <span>PM2.5(Particular Matter less than 2.5 microns)</span><br><span> N/A</span>`;
+            document.getElementById("PM10").innerHTML = `AQI : N/A <span>PM10(Particular Matter less than 10 microns)</span><br><span> N/A</span>`;
+            document.getElementById("co").innerHTML = `AQI : N/A <span>co(Carbon Monoxide)</span><br><span> N/A</span>`;
+            document.getElementById("o3").innerHTML = `AQI : N/A <span>PM2.5(Ozone)</span><br><span> N/A</span>`;
+            document.getElementById("no2").innerHTML = `AQI : N/A <span>PM2.5(Nitrogen Dioxide)</span><br><span> N/A</span>`;
+            document.getElementById("so2").innerHTML = `AQI : N/A <span>PM2.5(Sulphar Dioxide)</span><br><span> N/A</span>`;
         })
 }
 
@@ -195,13 +219,6 @@ function generateAdvice(category) {
         default: return 'No specific advice available. Stay informed by monitoring real-time AQI data for your area.';
     }
 }
-
-let place = document.getElementById("location").value;
-getData(place);
-document.getElementById("search-btn").addEventListener("click", () => {
-    place = document.getElementById("location").value
-    getData(place)
-})
 
 // --- Map Radar Function ---
 let radarMap = document.getElementById('radar-map');
@@ -228,16 +245,32 @@ async function fun(place) {
 }
 
 // --- Event Listeners and Initial Load ---
-fetchWeather("delhi,india");
-fetchWeatherData("Delhi");
-fun("New Delhi");
+function globalSearch(location) {
+    fetchWeather(location);
+    fetchWeatherData(location);
+    fun(location);
+    getData(location);
+}
+
+// Function to get stored location or default location
+function getInitialLocation() {
+    const storedLocation = localStorage.getItem("lastSearchLocation");
+    if (storedLocation) {
+        return storedLocation;
+    } else {
+        return "delhi,india"; // Default location
+    }
+}
+
+// Initial global search with stored or default location
+const initialLocation = getInitialLocation();
+globalSearch(initialLocation);
 
 searchButton.addEventListener("click", () => {
     const location = locationInput.value.trim();
     if (location) {
-        fetchWeather(location);
-        fetchWeatherData(location);
-        fun(location);
+        globalSearch(location);
+        localStorage.setItem("lastSearchLocation", location); // Store the searched location
     } else {
         alert("Please enter a location.");
     }

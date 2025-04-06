@@ -222,11 +222,11 @@ nav ul li a:hover {
 
 #search-div {
     width: 600px;
-    margin: 10px auto;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    margin: 5px;
 }
 
 #search-div button img {
@@ -263,7 +263,7 @@ nav ul li a:hover {
 }
 
 #qulity-box span {
-    width: 50%;
+    width: 43%;
 }
 
 #qulity-box #place-location {
@@ -337,4 +337,7 @@ nav ul li a:hover {
 
 #locate-btn:hover {
     background-color: #3367d6;
+}
+#logo{
+    height: 5px;
 }
