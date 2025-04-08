@@ -2,8 +2,13 @@
 
 // --- API Keys and Base URLs ---
 const apiKey = "9e6a15cda1f94d2f9f294103251103";
-const baseUrl = "http://api.weatherapi.com/v1/current.json";
-const sunUrl = "http://api.weatherapi.com/v1/astronomy.json";
+// const baseUrl = "http://api.weatherapi.com/v1/current.json";
+// const sunUrl = "http://api.weatherapi.com/v1/astronomy.json";
+
+
+let baseUrl = "https://api.weatherapi.com/v1/current.json";
+let sunUrl = "https://api.weatherapi.com/v1/astronomy.json";
+
 
 // --- DOM Elements ---
 let locationInput = document.getElementById("location");
@@ -147,6 +152,7 @@ function getData(location) {
     fetch(`${API_URL}${location}/?token=${API_KEY}`)
         .then(response => response.json())
         .then(data => {
+            console.log("air",data);
             if (data.status === 'ok') {
                 const myString = `${data.data.city.name}`;
                 const words = myString.trim().split(" ");
@@ -255,11 +261,11 @@ function globalSearch(location) {
 // Function to get stored location or default location
 function getInitialLocation() {
     const storedLocation = localStorage.getItem("lastSearchLocation");
-    if (storedLocation) {
-        return storedLocation;
-    } else {
-        return "delhi,india"; // Default location
-    }
+    // if (storedLocation) {
+    //     return storedLocation;
+    // } else {
+        return "New Delhi,India"; // Default location
+    // }
 }
 
 // Initial global search with stored or default location

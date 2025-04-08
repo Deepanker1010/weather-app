@@ -7,7 +7,7 @@ body {
     text-align: center;
 }
 
-/* nav bar */
+/* Nav Bar */
 nav {
     background-color: #021696;
     overflow: hidden;
@@ -58,7 +58,7 @@ nav ul li a:hover {
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px; /* Add margin for separation */
+    margin-bottom: 20px;
 }
 
 .weather-card h2 {
@@ -110,6 +110,7 @@ nav ul li a:hover {
     background-color: #0073e6;
 }
 
+/* Responsive Styles */
 @media only screen and (max-width: 768px) {
     .weather-card {
         margin: 20px auto;
@@ -127,7 +128,28 @@ nav ul li a:hover {
     .weather-details {
         padding: 10px;
     }
+
+    nav ul {
+        flex-direction: column; /* Stack nav items vertically */
+        align-items: stretch; /* Stretch items to full width */
+    }
+
+    nav ul li a {
+        padding: 10px; /* Adjust padding for smaller screens */
+    }
+
+    #search-div{
+        width: 100%;
+    }
+    #logo {
+        display: none;
+    }
+    radar-container {
+        max-width: 90%; /* Smaller width on tablets */
+        height: 300px; /* Set specific height for better visibility */
+    }
 }
+
 
 @media only screen and (max-width: 480px) {
     .weather-card {
@@ -150,6 +172,14 @@ nav ul li a:hover {
     .weather-details p {
         margin-bottom: 10px;
     }
+    #logo {
+        max-height: 30px; /* Further reduce height for very small screens */
+    }
+    .radar-container {
+        max-width: 95%; /* Almost full width on small phones */
+        height: 250px; /* Reduce height for compact devices */
+    }
+
 }
 
 .weather-container {
@@ -160,7 +190,7 @@ nav ul li a:hover {
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    margin-bottom: 20px; /* Add margin for separation */
+    margin-bottom: 20px;
 }
 
 .header {
@@ -221,7 +251,7 @@ nav ul li a:hover {
 }
 
 #search-div {
-    width: 600px;
+    /* width: 600px; */
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -240,10 +270,10 @@ nav ul li a:hover {
     font-weight: 100;
 }
 
-/* Air Quality css*/
+/* Air Quality CSS */
 .aqi-container {
-    max-width: 800px; /* Use max-width for consistent width */
-    margin: 20px auto; /* Center and add margin */
+    max-width: 800px;
+    margin: 20px auto;
     padding: 20px;
     background: #ffffff;
     border-radius: 10px;
@@ -284,19 +314,33 @@ nav ul li a:hover {
     box-shadow: 0 2px 0 1px;
     background: aliceblue;
 }
-#componentent{
+
+#componentent {
     display: flex;
 }
-/* Map Styles (From index-2.txt) */
+
+/* Map Styles */
+.radar-container {
+    width: 100%; /* Occupies full width of the parent */
+    max-width: 800px; /* Ensures it doesn't become too wide */
+    height: auto; /* Adjust height automatically to maintain aspect ratio */
+    margin: 20px auto; /* Center on the page */
+    border-radius: 10px;
+    aspect-ratio: 16 / 9; /* Ensures consistent ratio */
+}
 #map {
     height: 400px;
-    max-width: 800px; /* Use max-width for consistent width */
-    margin: 20px auto; /* Center and add margin */
+    max-width: 800px;
+    margin: 20px auto;
     border-radius: 10px;
 }
 
 .map-container {
-    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .map-controls {
@@ -309,6 +353,12 @@ nav ul li a:hover {
     gap: 10px;
     margin: 0 auto;
 }
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
 
 .control-btn {
     width: 40px;
@@ -338,6 +388,7 @@ nav ul li a:hover {
 #locate-btn:hover {
     background-color: #3367d6;
 }
-#logo{
+
+#logo {
     height: 5px;
 }
